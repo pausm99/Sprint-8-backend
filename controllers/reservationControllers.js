@@ -4,7 +4,7 @@ exports.getAllReservations = async (req, res, next) => {
   try {
     const [reservations, _] = await Reservation.findAll();
 
-    res.status(200).json({ count: reservations.length, reservations });
+    res.status(200).json({ reservations });
   } catch (error) {
     next(error);
   }
