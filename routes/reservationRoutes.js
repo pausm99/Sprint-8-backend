@@ -8,6 +8,9 @@ router
   .get(reservationControllers.getAllReservations)
   .post(reservationControllers.createNewReservation);
 
-router.route("/:id").get(reservationControllers.getReservationById);
+router
+  .route("/:id")
+  .get(reservationControllers.getReservationById)
+  .delete(reservationControllers.deleteReservationById);
 
 module.exports = router;

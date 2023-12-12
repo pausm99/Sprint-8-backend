@@ -37,6 +37,12 @@ class Reservation {
 
     return db.execute(sql);
   }
+
+  static deleteById(id) {
+    let sql = `DELETE FROM reservations WHERE id = ${id};`;
+
+    return db.execute(sql);
+  }
 }
 
 module.exports = Reservation;

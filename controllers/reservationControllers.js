@@ -15,7 +15,7 @@ exports.createNewReservation = async (req, res, next) => {
     let { guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number } = req.body;
     let reservation = new Reservation(guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number);
 
-    reservation = await reservation.save();
+    await reservation.save();
 
     res.status(201).json({ message: "Reservation created" });
   } catch (error) {
@@ -34,3 +34,15 @@ exports.getReservationById = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteReservationById = async (req, res, next) => {
+  try {
+    let reservationId = req.params.id;
+
+    await Reservation.deleteById(reservationId);
+
+    res.status(200).json({ message: "Reservation deleted" })
+  } catch (error) {
+    next(error);
+  }
+}
