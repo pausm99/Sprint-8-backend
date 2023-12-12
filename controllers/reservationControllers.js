@@ -4,7 +4,7 @@ exports.getAllReservations = async (req, res, next) => {
   try {
     const [reservations, _] = await Reservation.findAll();
 
-    res.status(200).json({ reservations });
+    res.status(200).json(reservations);
   } catch (error) {
     next(error);
   }
@@ -29,7 +29,7 @@ exports.getReservationById = async (req, res, next) => {
 
     let [reservation, _] = await Reservation.findById(reservationId);
 
-    res.status(200).json({ reservation: reservation[0] });
+    res.status(200).json(reservation[0]);
   } catch (error) {
     next(error);
   }
