@@ -12,8 +12,8 @@ exports.getAllReservations = async (req, res, next) => {
 
 exports.createNewReservation = async (req, res, next) => {
   try {
-    let { guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number } = req.body;
-    let reservation = new Reservation(guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number);
+    let { guest_name, email, check_in, check_out, hotel_id, phone_number } = req.body;
+    let reservation = new Reservation(guest_name, email, check_in, check_out, hotel_id, phone_number);
 
     await reservation.save();
 

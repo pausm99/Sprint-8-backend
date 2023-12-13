@@ -1,47 +1,56 @@
 const db = require("../config/db");
 
 class Reservation {
-  constructor(guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number) {
+  constructor(guest_name, email, check_in, check_out, hotel_id, phone_number) {
     this.guest_name = guest_name;
     this.email = email;
-    this.check_in_datetime = check_in_datetime;
-    this.check_out_datetime = check_out_datetime;
+    this.check_in = check_in;
+    this.check_out = check_out;
     this.hotel_id = hotel_id;
     this.phone_number = phone_number;
   }
 
   save() {
     let sql = `
-    INSERT INTO reservations (guest_name, email, check_in_datetime, check_out_datetime, hotel_id, phone_number)
-    VALUES (
-      '${this.guest_name}',
-      '${this.email}',
-      '${this.check_in_datetime}',
-      '${this.check_out_datetime}',
-      '${this.hotel_id}',
-      '${this.phone_number}'
-    )
+    INSERT INTO reservations (guest_name, email, check_in, check_out, hotel_id, phone_number)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    return db.execute(sql, [
+      this.guest_name,
+      this.email,
+      this.check_in,
+      this.check_out,
+      this.hotel_id,
+      this.phone_number
+    ]);
+  }
+
+  static findAll() {
+    let sql = `
+      SELECT reservations.id, reservations.guest_name, reservations.email, reservations.check_in, reservations.check_out, reservations.phone_number, hotels.hotel_name
+      FROM reservations
+      JOIN hotels ON reservations.hotel_id = hotels.id;
     `;
 
     return db.execute(sql);
   }
 
-  static findAll() {
-    let sql = "SELECT * FROM reservations;";
-
-    return db.execute(sql);
-  }
-
   static findById(id) {
-    let sql = `SELECT * FROM reservations WHERE id = ${id};`;
+    let sql = `
+      SELECT reservations.id, reservations.guest_name, reservations.email, reservations.check_in, reservations.check_out, reservations.phone_number, hotels.hotel_name
+      FROM reservations
+      JOIN hotels ON reservations.hotel_id = hotels.id
+      WHERE reservations.id = ?;
+    `;
 
-    return db.execute(sql);
+    return db.execute(sql, [id]);
   }
 
   static deleteById(id) {
-    let sql = `DELETE FROM reservations WHERE id = ${id};`;
+    let sql = "DELETE FROM reservations WHERE id = ?;";
 
-    return db.execute(sql);
+    return db.execute(sql, [id]);
   }
 }
 
