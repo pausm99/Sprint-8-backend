@@ -10,6 +10,10 @@ app.use(express.json(), cors()); // parse json bodies in the request object
 // Redirect requests to endpoint starting with /reservations to reservationRoutes.js
 app.use("/reservations", require("./routes/reservationRoutes"));
 
+// Redirect requests to endpoint starting with /hotels to hotelRoutes.js
+app.use("/hotels", require("./routes/hotelRoutes"));
+
+
 // Global Error Handler. IMPORTANT function params MUST start with err
 app.use((err, req, res, next) => {
   console.log(err.stack);
