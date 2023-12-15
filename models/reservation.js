@@ -28,17 +28,18 @@ class Reservation {
 
   static findAll() {
     let sql = `
-      SELECT reservations.id, reservations.guest_name, reservations.email, reservations.check_in, reservations.check_out, reservations.phone_number, hotels.hotel_name
+      SELECT reservations.*, hotels.hotel_name
       FROM reservations
       JOIN hotels ON reservations.hotel_id = hotels.id;
     `;
+
 
     return db.execute(sql);
   }
 
   static findById(id) {
     let sql = `
-      SELECT reservations.id, reservations.guest_name, reservations.email, reservations.check_in, reservations.check_out, reservations.phone_number, hotels.hotel_name
+      SELECT reservations.*, hotels.hotel_name
       FROM reservations
       JOIN hotels ON reservations.hotel_id = hotels.id
       WHERE reservations.id = ?;
@@ -51,6 +52,29 @@ class Reservation {
     let sql = "DELETE FROM reservations WHERE id = ?;";
 
     return db.execute(sql, [id]);
+  }
+
+  static update(reservation, id) {
+    let sql = `
+      UPDATE reservations
+      SET guest_name = ?,
+          email = ?,
+          check_in = ?,
+          check_out = ?,
+          hotel_id = ?,
+          phone_number = ?
+      WHERE id = ?
+    `;
+
+    return db.execute(sql, [
+      reservation.guest_name,
+      reservation.email,
+      reservation.check_in,
+      reservation.check_out,
+      reservation.hotel_id,
+      reservation.phone_number,
+      id
+    ]);
   }
 }
 

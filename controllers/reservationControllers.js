@@ -46,3 +46,16 @@ exports.deleteReservationById = async (req, res, next) => {
     next(error);
   }
 }
+
+exports.updateReservation = async (req, res, next) => {
+  try {
+    let reservation = req.body;
+    let id = req.params.id;
+
+    await Reservation.update(reservation, id);
+
+    res.status(200).json({ message: "Reservation updated" })
+  } catch (error) {
+    next(error);
+  }
+}

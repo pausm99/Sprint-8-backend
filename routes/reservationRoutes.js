@@ -6,11 +6,12 @@ const router = express.Router();
 router
   .route("/")
   .get(reservationControllers.getAllReservations)
-  .post(reservationControllers.createNewReservation);
+  .post(reservationControllers.createNewReservation)
 
 router
   .route("/:id")
   .get(reservationControllers.getReservationById)
-  .delete(reservationControllers.deleteReservationById);
+  .delete(reservationControllers.deleteReservationById)
+  .patch(reservationControllers.updateReservation);
 
 module.exports = router;
