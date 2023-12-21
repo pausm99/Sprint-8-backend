@@ -10,13 +10,13 @@ class Reservation {
     this.phone_number = phone_number;
   }
 
-  save() {
+  async save() {
     let sql = `
     INSERT INTO reservations (guest_name, email, check_in, check_out, hotel_id, phone_number)
     VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-    return db.execute(sql, [
+    const [result] = await db.execute(sql, [
       this.guest_name,
       this.email,
       this.check_in,
@@ -24,6 +24,10 @@ class Reservation {
       this.hotel_id,
       this.phone_number
     ]);
+
+    this.id = result.insertId;
+
+    return this;
   }
 
   static findAll() {

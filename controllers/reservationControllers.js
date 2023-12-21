@@ -15,9 +15,9 @@ exports.createNewReservation = async (req, res, next) => {
     let { guest_name, email, check_in, check_out, hotel_id, phone_number } = req.body;
     let reservation = new Reservation(guest_name, email, check_in, check_out, hotel_id, phone_number);
 
-    await reservation.save();
+    const reservationCreated = await reservation.save();
 
-    res.status(201).json({ message: "Reservation created" });
+    res.status(201).json(reservationCreated);
   } catch (error) {
     next(error);
   }

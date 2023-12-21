@@ -13,6 +13,9 @@ app.use("/reservations", require("./routes/reservationRoutes"));
 // Redirect requests to endpoint starting with /hotels to hotelRoutes.js
 app.use("/hotels", require("./routes/hotelRoutes"));
 
+// Redirect requests to endpoint starting with /hotels to hotelRoutes.js
+app.use("/events", require("./routes/eventRoutes"));
+
 
 // Global Error Handler. IMPORTANT function params MUST start with err
 app.use((err, req, res, next) => {
@@ -21,7 +24,7 @@ app.use((err, req, res, next) => {
   console.log(err.code);
 
   res.status(500).json({
-    message: "Something went rely wrong",
+    message: "ERR:500: Something went rely wrong",
   });
 });
 
