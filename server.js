@@ -20,7 +20,7 @@ app.use("/events", require("./routes/eventRoutes"));
 app.use("/graphics", require("./routes/graphicRoutes"));
 
 // Redirect requests to endpoint starting with /graphics to hotelRoutes.js
-app.use("/citypoint", require("./routes/cityPointRoutes"));
+app.use("/citypoints", require("./routes/cityPointRoutes"));
 
 
 // Global Error Handler. IMPORTANT function params MUST start with err
