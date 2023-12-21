@@ -13,8 +13,11 @@ app.use("/reservations", require("./routes/reservationRoutes"));
 // Redirect requests to endpoint starting with /hotels to hotelRoutes.js
 app.use("/hotels", require("./routes/hotelRoutes"));
 
-// Redirect requests to endpoint starting with /hotels to hotelRoutes.js
+// Redirect requests to endpoint starting with /events to hotelRoutes.js
 app.use("/events", require("./routes/eventRoutes"));
+
+// Redirect requests to endpoint starting with /graphics to hotelRoutes.js
+app.use("/graphics", require("./routes/graphicRoutes"));
 
 
 // Global Error Handler. IMPORTANT function params MUST start with err
