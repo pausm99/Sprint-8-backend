@@ -12,8 +12,8 @@ exports.getAllEvents = async (req, res, next) => {
 
 exports.createNewEvent = async (req, res, next) => {
   try {
-    let { title, start, end } = req.body;
-    let event = new Event(title, start, end);
+    let { title, start, end, color } = req.body;
+    let event = new Event(title, start, end, color);
 
     const eventCreated = await event.save();
 
@@ -47,7 +47,7 @@ exports.deleteEventById = async (req, res, next) => {
   }
 }
 
-exports.updateEvent = async (req, res, next) => {
+exports.updateEventById = async (req, res, next) => {
   try {
     let event = req.body;
     let id = req.params.id;
