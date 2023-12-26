@@ -7,3 +7,5 @@
 ```
 npm run dev
 ```
+> [!NOTE]
+> DB Dump is located in root folder "db_dump.sql"
